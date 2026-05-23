@@ -1,0 +1,271 @@
+/* ===== CSS CUSTOM PROPERTIES (kept for script.js var() references) ===== */
+@layer base {
+  :root {
+    --pink: #E8185A;
+    --teal: #00B4C8;
+    --bg: #0D0D0D;
+    --surface: #1A1A1A;
+    --border: #2E2E2E;
+    --text: #F0F0F0;
+    --muted: #8A8A8A;
+    --font-heading: 'Barlow Condensed', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Rajdhani', sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-dark text-text-light font-body leading-relaxed;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== COMPONENT CLASSES ===== */
+@layer components {
+
+  /* Accent text */
+  .accent { @apply text-pink; }
+
+  /* Section label */
+  .section-label {
+    @apply font-accent text-[13px] font-semibold text-pink tracking-[2px] uppercase mb-2;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-pink text-white px-7 py-3 rounded font-accent text-[15px] font-semibold
+           tracking-[0.5px] no-underline border-0 cursor-pointer transition-opacity
+           duration-200 inline-block hover:opacity-85;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-text-light px-7 py-3 rounded font-accent text-[15px]
+           font-semibold no-underline border border-border-dark transition-colors
+           duration-200 inline-block hover:border-pink hover:text-pink;
+  }
+  .btn-small {
+    @apply bg-pink text-white px-4 py-2 rounded font-accent text-[13px] font-semibold
+           border-0 cursor-pointer transition-opacity duration-200 hover:opacity-85;
+  }
+
+  /* Stock badges */
+  .stock-badge {
+    @apply font-accent text-[11px] font-semibold px-2 py-0.5 rounded-sm tracking-[1px];
+  }
+  .in-stock  { @apply bg-teal/10 text-teal; }
+  .low-stock { @apply bg-pink/10 text-pink; }
+
+  /* Product card (homepage featured) */
+  .product-card {
+    @apply bg-dark border border-border-dark rounded-lg overflow-hidden
+           transition-all duration-200 hover:border-pink hover:shadow-[0_0_20px_rgba(232,24,90,0.15)];
+  }
+
+  /* Part card (parts page) */
+  .part-card {
+    @apply bg-surface border border-border-dark rounded-lg overflow-hidden
+           transition-all duration-200 hover:border-pink hover:shadow-[0_0_20px_rgba(232,24,90,0.12)];
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/75 backdrop-blur-sm z-[2000] flex items-center
+           justify-center p-6 opacity-0 pointer-events-none transition-opacity duration-200;
+  }
+  .modal-overlay.open {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  /* Modal box */
+  .modal {
+    @apply bg-surface border border-border-dark rounded-xl p-8 w-full max-w-[440px]
+           relative translate-y-4 transition-transform duration-200;
+  }
+  .modal-overlay.open .modal {
+    @apply translate-y-0;
+  }
+
+  .modal-close {
+    @apply absolute top-4 right-4 bg-transparent border-0 text-muted text-lg
+           cursor-pointer leading-none hover:text-text-light;
+  }
+
+  .modal-sku {
+    @apply font-accent text-[11px] font-semibold tracking-[1.5px] uppercase text-muted mb-0.5;
+  }
+
+  .modal-price {
+    @apply font-heading text-[22px] font-bold text-pink mb-5;
+  }
+
+  .modal-form {
+    @apply flex flex-col gap-3;
+  }
+
+  .modal-form input,
+  .modal-form textarea {
+    @apply bg-dark border border-border-dark rounded px-4 py-3 text-text-light
+           font-body text-sm outline-none transition-colors duration-200
+           resize-none placeholder:text-muted focus:border-pink;
+  }
+
+  /* Fade-in animation */
+  .fade-in {
+    @apply opacity-0 translate-y-6 transition-all duration-500 ease-out;
+  }
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Header */
+  header {
+    @apply fixed top-0 w-full z-[1000] bg-dark/95 backdrop-blur-[10px] border-b border-border-dark;
+  }
+
+  /* Nav links */
+  nav a {
+    @apply font-accent text-sm font-semibold text-muted no-underline tracking-[0.5px]
+           transition-colors duration-200 hover:text-text-light;
+  }
+
+  /* Mobile nav */
+  .mobile-nav {
+    @apply flex flex-col px-6 py-4 border-t border-border-dark gap-4;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-width: 0;
+    transition: max-height 0.25s ease, opacity 0.25s ease, padding 0.25s ease, border-top-width 0.25s ease;
+  }
+  .mobile-nav.open {
+    max-height: 300px;
+    opacity: 1;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top-width: 1px;
+  }
+  .mobile-nav a {
+    @apply font-accent text-base font-semibold text-muted no-underline;
+  }
+
+  /* Logo image */
+  .logo-img {
+    @apply h-12 w-auto object-contain block;
+  }
+  .footer-logo-img {
+    @apply h-14 mb-1.5;
+  }
+
+  /* Hero */
+  .hero-bg {
+    @apply absolute inset-0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(232,24,90,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(0,180,200,0.05) 0%, transparent 50%);
+  }
+
+  .hero-logo-img {
+    @apply w-full max-w-[420px] object-contain;
+    filter: drop-shadow(0 0 40px rgba(232,24,90,0.25));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .hero-scroll {
+    @apply absolute bottom-8 left-1/2 -translate-x-1/2 text-muted text-xl;
+    animation: bounce-y 2s infinite;
+  }
+
+  /* Category card */
+  .cat-card {
+    @apply bg-surface p-8 transition-all duration-200 border-l-[3px] border-l-transparent
+           hover:bg-[#222] hover:border-l-pink;
+  }
+
+  /* Contact form inputs */
+  .contact-form input,
+  .contact-form textarea {
+    @apply bg-dark border border-border-dark rounded px-4 py-3 text-text-light
+           font-body text-sm outline-none transition-colors duration-200
+           resize-none placeholder:text-muted focus:border-pink;
+  }
+
+  /* Footer */
+  .footer-fb { @apply text-[#1877f2] hover:text-[#4a9ff5]; }
+
+  /* Parts page sidebar */
+  .sidebar-list li a {
+    @apply flex items-center gap-2.5 px-3 py-2.5 rounded font-accent text-sm font-semibold
+           text-muted no-underline transition-all duration-200 hover:bg-surface hover:text-text-light;
+  }
+  .sidebar-list li a.active {
+    @apply bg-surface text-pink border-l-2 border-pink;
+  }
+
+  /* Parts page part image area */
+  .part-img {
+    @apply h-[120px] bg-[#111] flex items-center justify-center text-[40px]
+           border-b border-border-dark;
+  }
+
+  /* Product page visual */
+  .product-visual {
+    @apply bg-surface border border-border-dark rounded-xl flex items-center
+           justify-center text-[100px];
+    height: 220px;
+  }
+
+  /* Specs list */
+  .specs-list { @apply list-none flex flex-col gap-2; }
+  .specs-list li {
+    @apply flex justify-between text-sm py-2.5 border-b border-border-dark;
+  }
+  .specs-list li span:first-child { @apply text-muted; }
+  .specs-list li span:last-child  { @apply font-medium; }
+
+  /* Qty control */
+  .qty-control {
+    @apply flex items-center border border-border-dark rounded overflow-hidden;
+  }
+  .qty-btn {
+    @apply w-9 h-9 bg-surface border-0 text-text-light text-lg cursor-pointer
+           transition-colors duration-200 hover:bg-[#2a2a2a];
+  }
+  .qty-input {
+    @apply w-12 h-9 bg-dark border-0 border-x border-border-dark text-text-light
+           font-heading text-lg font-bold text-center outline-none;
+  }
+
+  /* Badge (about section) */
+  .badge {
+    @apply flex items-center gap-3 bg-surface border border-border-dark rounded-md
+           p-4 font-accent text-[15px] font-semibold;
+  }
+  .badge-icon {
+    @apply w-7 h-7 bg-pink rounded-full flex items-center justify-center
+           text-[13px] shrink-0;
+  }
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes bounce-y {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Product visual — sticky only on desktop */
+@media (min-width: 768px) {
+  .product-visual {
+    height: 360px;
+    position: sticky;
+    top: 88px;
+  }
+}

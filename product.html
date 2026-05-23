@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Alvin Motorshop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:title" content="Product Detail — Alvin Motorshop">
+    <meta property="og:description" content="View motorcycle part details and inquire about availability at Alvin Motorshop in Gingoog City. Genuine parts for all major brands.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alvinmotorshop.com/product.html">
+    <meta property="og:image" content="logo/alvin.jpg">
+    <link rel="stylesheet" href="src/main.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="max-w-[1100px] mx-auto px-6 flex items-center justify-between h-16">
+            <div class="flex flex-col leading-none">
+                <a href="index.html">
+                    <img src="logo/alvin.jpg" alt="Alvin Motorshop" class="logo-img">
+                </a>
+            </div>
+            <nav class="hidden md:flex gap-8">
+                <a href="index.html#home">Home</a>
+                <a href="parts.html" class="!text-text-light">Parts</a>
+                <a href="index.html#featured">Shop</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <a href="index.html#contact" class="btn-primary hidden md:inline-block">Get a Quote</a>
+            <button class="hamburger-btn md:hidden bg-transparent border-0 text-text-light text-[22px] cursor-pointer" onclick="toggleMenu()">&#9776;</button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="parts.html">Parts</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </header>
+
+    <div class="pt-[120px] pb-20">
+        <div class="max-w-[1100px] mx-auto px-6">
+
+            <!-- BREADCRUMB -->
+            <div class="flex items-center gap-2 font-accent text-[13px] text-muted mb-10">
+                <a href="index.html" class="text-muted no-underline hover:text-pink">Home</a> ›
+                <a href="parts.html" class="text-muted no-underline hover:text-pink">Parts</a> ›
+                <a href="#" class="text-muted no-underline hover:text-pink" id="breadCat">Engine Parts</a> ›
+                <span class="text-text-light" id="breadName">Carburetor Assembly</span>
+            </div>
+
+            <!-- PRODUCT DETAIL -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div class="product-visual" id="productIcon">⚙️</div>
+
+                <div class="flex flex-col gap-5">
+                    <div>
+                        <div class="font-accent text-[11px] font-semibold tracking-[2px] uppercase text-muted" id="productSku">ENG-001</div>
+                        <h1 class="font-heading text-[48px] font-extrabold leading-none" id="productName">Carburetor Assembly</h1>
+                    </div>
+
+                    <div class="font-heading text-[40px] font-extrabold text-pink" id="productPrice">₱850</div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 rounded-full bg-teal" id="stockDot"></div>
+                        <span class="font-accent text-sm font-semibold text-teal" id="stockText">In Stock</span>
+                    </div>
+
+                    <hr class="border-0 border-t border-border-dark">
+
+                    <p class="text-[15px] text-muted leading-[1.8]" id="productDesc">Universal fit for most 125cc–150cc motorcycles.</p>
+
+                    <div>
+                        <div class="font-accent text-[11px] font-semibold tracking-[2px] uppercase text-muted mb-3">Specifications</div>
+                        <ul class="specs-list" id="specsList"></ul>
+                    </div>
+
+                    <hr class="border-0 border-t border-border-dark">
+
+                    <div class="flex items-center gap-3">
+                        <span class="font-accent text-[13px] font-semibold text-muted tracking-[1px]">QTY</span>
+                        <div class="qty-control">
+                            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                            <input type="number" class="qty-input" id="qtyInput" value="1" min="1">
+                            <button class="qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="btn-primary flex-1 text-center text-base py-3.5" onclick="openInquiryModal()">Send Inquiry</button>
+                        <a href="#" id="backBtn" class="btn-ghost py-3.5 px-5">← Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PARTS -->
+        <div class="mt-20 pt-20 border-t border-border-dark">
+            <div class="max-w-[1100px] mx-auto px-6">
+                <h2 class="font-heading text-[32px] font-extrabold mb-6">More in <span class="accent" id="relatedCatName">Engine Parts</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="relatedGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INQUIRY MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <p class="section-label">Product Inquiry</p>
+            <h3 class="font-heading text-[28px] font-bold mt-1 mb-1" id="modalName"></h3>
+            <p class="modal-price" id="modalPrice"></p>
+            <form class="modal-form" onsubmit="submitInquiry(event)" novalidate>
+                <input type="text" placeholder="Your Name *" id="mName">
+                <input type="text" placeholder="Phone Number *" id="mPhone">
+                <input type="number" placeholder="Quantity" id="mQty" min="1" value="1">
+                <textarea placeholder="Additional notes (optional)" id="mNotes" rows="3"></textarea>
+                <button type="submit" class="btn-primary">Send Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="border-t border-border-dark pt-10">
+        <div class="max-w-[1100px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center pb-10 gap-6 text-center md:text-left">
+            <div class="flex flex-col items-center md:items-start">
+                <img src="logo/alvin.jpg" alt="Alvin Motorshop" class="logo-img footer-logo-img">
+                <p class="text-xs text-muted mt-1">Parts & Accessories — Gingoog City</p>
+            </div>
+            <div class="flex flex-wrap gap-7 justify-center items-center">
+                <a href="https://www.facebook.com/alvin.galvez.686004" target="_blank" class="footer-fb flex items-center gap-1.5 font-accent text-[13px] font-semibold no-underline transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                    Facebook
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-border-dark py-4 px-6 text-center">
+            <p class="text-xs text-muted">© 2026 Alvin Motorshop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+      class="fixed bottom-6 right-6 z-50 w-10 h-10 bg-pink text-white rounded-full
+             flex items-center justify-center opacity-0 pointer-events-none
+             transition-opacity duration-300 hover:opacity-85">↑</button>
+
+    <script type="module">
+        const catalog = {
+            engine: {
+                title: 'Engine Parts',
+                items: [
+                    { icon: '⚙️', sku: 'ENG-001', name: 'Carburetor Assembly', desc: 'Universal fit for most 125cc–150cc motorcycles. Compatible with Honda Wave, Yamaha Mio, Suzuki Smash, and more.', price: '₱850', stock: 'in-stock', specs: [['Compatibility','125cc – 150cc'],['Type','Slide Carburetor'],['Bore Size','24mm'],['Brand Fit','Honda, Yamaha, Suzuki'],['Condition','Brand New']] },
+                    { icon: '⚙️', sku: 'ENG-002', name: 'Piston Kit', desc: 'Standard bore piston set complete with rings and pin. Ideal for engine rebuild or overhaul.', price: '₱650', stock: 'in-stock', specs: [['Bore Size','52.4mm Standard'],['Includes','Piston, Rings, Pin, Clips'],['Compatibility','125cc 4-stroke'],['Condition','Brand New']] },
+                    { icon: '⚙️', sku: 'ENG-003', name: 'Head Gasket Set', desc: 'Full gasket set for Honda Wave 125.', price: '₱280', stock: 'in-stock', specs: [['Model Fit','Honda Wave 125'],['Includes','Full gasket set'],['Material','Multi-layer steel'],['Condition','Brand New']] },
+                    { icon: '⚙️', sku: 'ENG-004', name: 'Camshaft', desc: 'OEM replacement camshaft for Yamaha Mio.', price: '₱1,200', stock: 'low-stock', specs: [['Model Fit','Yamaha Mio'],['Type','OEM Replacement'],['Material','Hardened Steel'],['Condition','Brand New']] },
+                    { icon: '⚙️', sku: 'ENG-005', name: 'Valve Set', desc: 'Intake and exhaust valves, set of 4.', price: '₱420', stock: 'in-stock', specs: [['Includes','2 Intake + 2 Exhaust'],['Stem Diameter','4.5mm'],['Compatibility','125cc 4-stroke'],['Condition','Brand New']] },
+                    { icon: '⚙️', sku: 'ENG-006', name: 'Crankshaft Bearing', desc: 'Heavy-duty bearing for all 150cc engines.', price: '₱380', stock: 'in-stock', specs: [['Type','Ball Bearing'],['Size','25x52x15mm'],['Compatibility','150cc engines'],['Condition','Brand New']] },
+                ]
+            },
+            tools: {
+                title: 'Tools & Equipment',
+                items: [
+                    { icon: '🔧', sku: 'TLS-001', name: 'Socket Wrench Set', desc: '24-piece metric socket set with ratchet handle.', price: '₱1,800', stock: 'in-stock', specs: [['Pieces','24'],['Drive Size','1/4" and 3/8"'],['Range','6mm – 24mm'],['Material','Chrome Vanadium']] },
+                    { icon: '🔧', sku: 'TLS-002', name: 'Torque Wrench', desc: '10–150 Nm adjustable torque wrench.', price: '₱2,200', stock: 'in-stock', specs: [['Range','10 – 150 Nm'],['Drive','1/2"'],['Length','450mm'],['Type','Click-type']] },
+                    { icon: '🔧', sku: 'TLS-003', name: 'Valve Spring Compressor', desc: 'Universal valve spring removal and installation tool.', price: '₱650', stock: 'low-stock', specs: [['Type','Universal'],['Compatibility','All 4-stroke engines'],['Material','Steel'],['Condition','Brand New']] },
+                    { icon: '🔧', sku: 'TLS-004', name: 'Chain Breaker Tool', desc: 'Heavy-duty motorcycle chain breaker and riveter.', price: '₱480', stock: 'in-stock', specs: [['Compatible Chains','420, 428, 520, 525, 530'],['Material','Hardened Steel'],['Condition','Brand New']] },
+                ]
+            },
+            wheels: {
+                title: 'Wheels & Tires',
+                items: [
+                    { icon: '🛞', sku: 'WHL-001', name: 'Alloy Rim Set', desc: 'Lightweight alloy rims, 17" front and rear.', price: '₱2,400', stock: 'in-stock', specs: [['Size','17 inch'],['Includes','Front + Rear'],['Material','Aluminum Alloy'],['Spoke Count','36']] },
+                    { icon: '🛞', sku: 'WHL-002', name: 'Front Tire 70/90-17', desc: 'Tubeless tire with all-terrain compound.', price: '₱680', stock: 'in-stock', specs: [['Size','70/90-17'],['Type','Tubeless'],['Load Index','38P'],['Condition','Brand New']] },
+                    { icon: '🛞', sku: 'WHL-003', name: 'Rear Tire 80/90-17', desc: 'Tubeless tire with reinforced sidewall.', price: '₱750', stock: 'in-stock', specs: [['Size','80/90-17'],['Type','Tubeless'],['Load Index','44P'],['Condition','Brand New']] },
+                    { icon: '🛞', sku: 'WHL-004', name: 'Brake Disc Rotor', desc: 'Wavy disc rotor for improved heat dissipation.', price: '₱920', stock: 'low-stock', specs: [['Diameter','220mm'],['Thickness','3.5mm'],['Bolt Pattern','4-hole'],['Type','Wavy/Petal']] },
+                    { icon: '🛞', sku: 'WHL-005', name: 'Brake Pads Set', desc: 'Semi-metallic pads for disc brakes.', price: '₱320', stock: 'in-stock', specs: [['Type','Semi-metallic'],['Compatibility','Universal disc brake'],['Includes','2 pads'],['Condition','Brand New']] },
+                ]
+            },
+            electrical: {
+                title: 'Electrical',
+                items: [
+                    { icon: '💡', sku: 'ELC-001', name: 'LED Headlight Kit', desc: 'High-brightness LED conversion kit, plug and play.', price: '₱650', stock: 'in-stock', specs: [['Type','LED Conversion'],['Fit','Universal H4'],['Brightness','6000K White'],['Condition','Brand New']] },
+                    { icon: '💡', sku: 'ELC-002', name: 'Motorcycle Battery 12V', desc: 'Maintenance-free AGM battery 5Ah.', price: '₱1,100', stock: 'in-stock', specs: [['Voltage','12V'],['Capacity','5Ah'],['Type','AGM Maintenance-Free'],['Condition','Brand New']] },
+                    { icon: '💡', sku: 'ELC-003', name: 'CDI Unit', desc: 'Racing CDI for Honda XRM 125.', price: '₱580', stock: 'in-stock', specs: [['Model Fit','Honda XRM 125'],['Type','Racing CDI'],['Rev Limiter','Removed'],['Condition','Brand New']] },
+                    { icon: '💡', sku: 'ELC-004', name: 'Wiring Harness', desc: 'Complete wiring harness for Yamaha Sniper.', price: '₱1,400', stock: 'low-stock', specs: [['Model Fit','Yamaha Sniper'],['Type','OEM Replacement'],['Condition','Brand New']] },
+                ]
+            },
+            accessories: {
+                title: 'Accessories',
+                items: [
+                    { icon: '🛡️', sku: 'ACC-001', name: 'Full-Face Helmet', desc: 'DOT-approved full-face helmet, size M–XL.', price: '₱1,800', stock: 'in-stock', specs: [['Standard','DOT Approved'],['Sizes','M, L, XL'],['Shell','ABS Plastic'],['Condition','Brand New']] },
+                    { icon: '🛡️', sku: 'ACC-002', name: 'Side Mirrors Pair', desc: 'Universal chrome side mirrors.', price: '₱280', stock: 'in-stock', specs: [['Finish','Chrome'],['Fit','Universal'],['Includes','Left + Right'],['Condition','Brand New']] },
+                    { icon: '🛡️', sku: 'ACC-003', name: 'Motorcycle Cover', desc: 'Waterproof cover for 125cc–250cc bikes.', price: '₱450', stock: 'in-stock', specs: [['Fit','125cc – 250cc'],['Material','Polyester'],['Feature','Waterproof'],['Condition','Brand New']] },
+                    { icon: '🛡️', sku: 'ACC-004', name: 'Handlebar Grips', desc: 'Anti-slip rubber grips, universal fit.', price: '₱120', stock: 'in-stock', specs: [['Material','Rubber'],['Fit','Universal 7/8"'],['Feature','Anti-slip'],['Condition','Brand New']] },
+                ]
+            },
+            oils: {
+                title: 'Oils & Fluids',
+                items: [
+                    { icon: '🛢️', sku: 'OIL-001', name: 'Motul 10W-40', desc: 'Semi-synthetic engine oil, 800ml.', price: '₱320', stock: 'in-stock', specs: [['Viscosity','10W-40'],['Volume','800ml'],['Type','Semi-Synthetic'],['Condition','Brand New']] },
+                    { icon: '🛢️', sku: 'OIL-002', name: 'Castrol Power 1', desc: '4T engine oil 10W-30, 1L.', price: '₱280', stock: 'in-stock', specs: [['Viscosity','10W-30'],['Volume','1L'],['Type','Mineral'],['Condition','Brand New']] },
+                    { icon: '🛢️', sku: 'OIL-003', name: 'DOT 4 Brake Fluid', desc: 'High-performance brake fluid, 500ml.', price: '₱180', stock: 'in-stock', specs: [['Standard','DOT 4'],['Volume','500ml'],['Condition','Brand New']] },
+                    { icon: '🛢️', sku: 'OIL-004', name: 'Chain Lubricant', desc: 'All-weather chain lube spray, 400ml.', price: '₱220', stock: 'low-stock', specs: [['Volume','400ml'],['Type','Spray'],['Feature','All-weather'],['Condition','Brand New']] },
+                ]
+            }
+        };
+
+        function getParams() {
+            const p = new URLSearchParams(window.location.search);
+            return { cat: p.get('cat') || 'engine', sku: p.get('sku') || '' };
+        }
+
+        function loadProduct() {
+            const { cat, sku } = getParams();
+            const catData = catalog[cat];
+            if (!catData) return;
+
+            const item = catData.items.find(i => i.sku === sku) || catData.items[0];
+
+            document.getElementById('breadCat').textContent = catData.title;
+            document.getElementById('breadCat').href = `parts.html?cat=${cat}`;
+            document.getElementById('breadName').textContent = item.name;
+            document.getElementById('productIcon').textContent = item.icon;
+            document.getElementById('productSku').textContent = item.sku;
+            document.getElementById('productName').textContent = item.name;
+            document.getElementById('productPrice').textContent = item.price;
+            document.getElementById('productDesc').textContent = item.desc;
+            document.getElementById('relatedCatName').textContent = catData.title;
+            document.title = `${item.name} — Alvin Motorshop`;
+
+            const dot = document.getElementById('stockDot');
+            const txt = document.getElementById('stockText');
+            if (item.stock === 'low-stock') {
+                dot.classList.replace('bg-teal', 'bg-pink');
+                txt.textContent = 'Low Stock';
+                txt.classList.replace('text-teal', 'text-pink');
+            } else {
+                txt.textContent = 'In Stock';
+            }
+
+            const specsList = document.getElementById('specsList');
+            specsList.innerHTML = (item.specs || []).map(([k, v]) =>
+                `<li><span>${k}</span><span>${v}</span></li>`
+            ).join('');
+
+            document.getElementById('backBtn').href = `parts.html?cat=${cat}`;
+
+            const related = catData.items.filter(i => i.sku !== item.sku).slice(0, 4);
+            document.getElementById('relatedGrid').innerHTML = related.map(r => `
+                <div class="part-card fade-in">
+                    <div class="part-img">${r.icon}</div>
+                    <div class="p-3.5">
+                        <span class="font-accent text-[11px] font-semibold tracking-[1.5px] text-muted uppercase">${r.sku}</span>
+                        <h4 class="font-heading text-[18px] font-bold my-1">${r.name}</h4>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="font-heading text-[22px] font-bold text-pink">${r.price}</span>
+                            <a href="product.html?cat=${cat}&sku=${r.sku}" class="btn-small">View</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach((el, i) => {
+                    setTimeout(() => el.classList.add('visible'), i * 80);
+                });
+            }, 50);
+        }
+
+        window.changeQty = function(delta) {
+            const input = document.getElementById('qtyInput');
+            const val = Math.max(1, parseInt(input.value) + delta);
+            input.value = val;
+        };
+
+        window.openInquiryModal = function() {
+            const name = document.getElementById('productName').textContent;
+            const price = document.getElementById('productPrice').textContent;
+            const qty = document.getElementById('qtyInput').value;
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalPrice').textContent = price;
+            const modalQty = document.getElementById('mQty');
+            if (modalQty) modalQty.value = qty;
+            document.getElementById('modalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeModal = function() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+            const modal = overlay.querySelector('.modal');
+            if (modal && !modal.querySelector('form')) {
+                modal.innerHTML = `
+                    <button class="modal-close" onclick="closeModal()">✕</button>
+                    <p class="section-label">Product Inquiry</p>
+                    <h3 class="font-heading text-[28px] font-bold mt-1 mb-1" id="modalName"></h3>
+                    <p class="modal-price" id="modalPrice"></p>
+                    <form class="modal-form" onsubmit="submitInquiry(event)" novalidate>
+                        <input type="text" placeholder="Your Name *" id="mName">
+                        <input type="text" placeholder="Phone Number *" id="mPhone">
+                        <input type="number" placeholder="Quantity" id="mQty" min="1" value="1">
+                        <textarea placeholder="Additional notes (optional)" id="mNotes" rows="3"></textarea>
+                        <button type="submit" class="btn-primary">Send Inquiry</button>
+                    </form>
+                `;
+            }
+        };
+
+        window.submitInquiry = function(e) {
+            e.preventDefault();
+            const form    = e.target;
+            const nameEl  = form.querySelector('#mName');
+            const phoneEl = form.querySelector('#mPhone');
+            const qtyEl   = form.querySelector('#mQty');
+            const notesEl = form.querySelector('#mNotes');
+
+            function showErr(el, msg) {
+                el.classList.add('!border-pink');
+                let err = el.nextElementSibling;
+                if (!err || !err.classList.contains('field-error')) {
+                    err = document.createElement('p');
+                    err.className = 'field-error text-[11px] text-pink mt-1';
+                    el.insertAdjacentElement('afterend', err);
+                }
+                err.textContent = msg;
+            }
+            function clearErr(el) {
+                el.classList.remove('!border-pink');
+                const next = el.nextElementSibling;
+                if (next && next.classList.contains('field-error')) next.remove();
+            }
+
+            let valid = true;
+            const nameVal = nameEl ? nameEl.value.trim() : '';
+            if (!nameVal) { showErr(nameEl, 'Name is required.'); valid = false; }
+            else if (nameVal.length < 2) { showErr(nameEl, 'Name must be at least 2 characters.'); valid = false; }
+            else if (!/[a-zA-Z]/.test(nameVal) || /^\d+$/.test(nameVal)) { showErr(nameEl, 'Name must contain letters, not numbers only.'); valid = false; }
+            else clearErr(nameEl);
+            if (!phoneEl.value.trim() || !/^[\d\s\-\+\(\)]{7,15}$/.test(phoneEl.value.trim())) { showErr(phoneEl, phoneEl.value.trim() ? 'Enter a valid phone number.' : 'Phone number is required.'); valid = false; } else clearErr(phoneEl);
+            if (!qtyEl.value || isNaN(parseInt(qtyEl.value)) || parseInt(qtyEl.value) < 1) { showErr(qtyEl, 'Quantity must be at least 1.'); valid = false; } else clearErr(qtyEl);
+            if (!valid) return;
+
+            const productName  = document.getElementById('modalName').textContent;
+            const productPrice = document.getElementById('modalPrice').textContent;
+            const name  = nameEl.value.trim();
+            const phone = phoneEl.value.trim();
+            const qty   = qtyEl.value;
+            const notes = notesEl ? notesEl.value.trim() : '';
+
+            let msg = "Hi! I'd like to inquire about the following:\n\n";
+            msg += 'Product: ' + productName + '\n';
+            msg += 'Price: ' + productPrice + '\n';
+            msg += 'Qty: ' + qty + '\n\n';
+            msg += 'Name: ' + name + '\n';
+            msg += 'Phone: ' + phone + '\n';
+            if (notes) msg += 'Notes: ' + notes + '\n';
+            msg = msg.trim();
+
+            const modal = document.querySelector('.modal');
+            if (!modal) return;
+
+            modal.innerHTML = `
+                <div class="p-2 flex flex-col gap-3">
+                    <p class="section-label">Inquiry Summary</p>
+                    <p class="font-heading text-[18px] font-bold text-text-light">${productName}</p>
+                    <p class="text-pink font-bold text-sm">${productPrice} &nbsp;·&nbsp; Qty: ${qty}</p>
+                    <p class="text-[12px] text-muted">Tap "Copy Message", then paste it in Facebook Messenger.</p>
+                    <textarea id="fbMsgText" readonly rows="8"
+                        class="bg-dark border border-border-dark rounded px-3 py-2 text-text-light text-[12px] font-body leading-relaxed resize-none outline-none focus:border-pink w-full"
+                        onclick="this.select();this.setSelectionRange(0,99999);"
+                    >${msg}</textarea>
+                    <button type="button" id="copyMsgBtn" onclick="copyInquiryMsg(this)"
+                        class="btn-primary block text-center w-full">Copy Message</button>
+                    <a href="https://www.facebook.com/alvin.galvez.686004" target="_blank" rel="noopener"
+                        class="btn-ghost block text-center w-full">Open Facebook</a>
+                    <button type="button" onclick="closeModal()" class="text-[12px] text-muted underline text-center mt-1">Close</button>
+                </div>
+            `;
+        };
+
+        window.copyInquiryMsg = function(btnEl) {
+            const ta = document.getElementById('fbMsgText');
+            if (!ta) return;
+            const text = ta.value;
+            const doFallback = () => {
+                ta.select();
+                ta.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    btnEl.textContent = '✓ Copied!';
+                    setTimeout(() => { btnEl.textContent = 'Copy Message'; }, 2500);
+                } catch(err) {}
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    btnEl.textContent = '✓ Copied!';
+                    setTimeout(() => { btnEl.textContent = 'Copy Message'; }, 2500);
+                }).catch(doFallback);
+            } else {
+                doFallback();
+            }
+        };
+
+        window.toggleMenu = function() {
+            const nav = document.getElementById('mobileNav');
+            const btn = document.querySelector('.hamburger-btn');
+            nav.classList.toggle('open');
+            if (btn) btn.textContent = nav.classList.contains('open') ? '✕' : '☰';
+        };
+
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').style.borderBottomColor =
+                window.scrollY > 10 ? '#E8185A' : '#2E2E2E';
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        if (backToTop) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                    backToTop.classList.add('opacity-100');
+                } else {
+                    backToTop.classList.add('opacity-0', 'pointer-events-none');
+                    backToTop.classList.remove('opacity-100');
+                }
+            });
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') window.closeModal();
+        });
+
+        loadProduct();
+    </script>
+</body>
+</html>
