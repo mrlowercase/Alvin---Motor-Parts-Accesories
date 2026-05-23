@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Alvin Motorshop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/Alvin---Motor-Parts-Accesories/assets/favicon-BT0aYs8J.svg">
+    <meta property="og:title" content="Product Detail — Alvin Motorshop">
+    <meta property="og:description" content="View motorcycle part details and inquire about availability at Alvin Motorshop in Gingoog City. Genuine parts for all major brands.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alvinmotorshop.com/product.html">
+    <meta property="og:image" content="logo/alvin.jpg">
+  <script type="module" crossorigin src="/Alvin---Motor-Parts-Accesories/assets/product-CC5BBwEe.js"></script>
+  <link rel="modulepreload" crossorigin href="/Alvin---Motor-Parts-Accesories/assets/main-CgK1J6gc.js">
+  <link rel="stylesheet" crossorigin href="/Alvin---Motor-Parts-Accesories/assets/main-CFWdPHyg.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="max-w-[1100px] mx-auto px-6 flex items-center justify-between h-16">
+            <div class="flex flex-col leading-none">
+                <a href="index.html">
+                    <img src="/Alvin---Motor-Parts-Accesories/assets/alvin-CdkM6YAD.jpg" alt="Alvin Motorshop" class="logo-img">
+                </a>
+            </div>
+            <nav class="hidden md:flex gap-8">
+                <a href="index.html#home">Home</a>
+                <a href="parts.html" class="!text-text-light">Parts</a>
+                <a href="index.html#featured">Shop</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <a href="index.html#contact" class="btn-primary hidden md:inline-block">Get a Quote</a>
+            <button class="hamburger-btn md:hidden bg-transparent border-0 text-text-light text-[22px] cursor-pointer" onclick="toggleMenu()">&#9776;</button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="parts.html">Parts</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </header>
+
+    <div class="pt-[120px] pb-20">
+        <div class="max-w-[1100px] mx-auto px-6">
+
+            <!-- BREADCRUMB -->
+            <div class="flex items-center gap-2 font-accent text-[13px] text-muted mb-10">
+                <a href="index.html" class="text-muted no-underline hover:text-pink">Home</a> ›
+                <a href="parts.html" class="text-muted no-underline hover:text-pink">Parts</a> ›
+                <a href="#" class="text-muted no-underline hover:text-pink" id="breadCat">Engine Parts</a> ›
+                <span class="text-text-light" id="breadName">Carburetor Assembly</span>
+            </div>
+
+            <!-- PRODUCT DETAIL -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div class="product-visual" id="productIcon">⚙️</div>
+
+                <div class="flex flex-col gap-5">
+                    <div>
+                        <div class="font-accent text-[11px] font-semibold tracking-[2px] uppercase text-muted" id="productSku">ENG-001</div>
+                        <h1 class="font-heading text-[48px] font-extrabold leading-none" id="productName">Carburetor Assembly</h1>
+                    </div>
+
+                    <div class="font-heading text-[40px] font-extrabold text-pink" id="productPrice">₱850</div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 rounded-full bg-teal" id="stockDot"></div>
+                        <span class="font-accent text-sm font-semibold text-teal" id="stockText">In Stock</span>
+                    </div>
+
+                    <hr class="border-0 border-t border-border-dark">
+
+                    <p class="text-[15px] text-muted leading-[1.8]" id="productDesc">Universal fit for most 125cc–150cc motorcycles.</p>
+
+                    <div>
+                        <div class="font-accent text-[11px] font-semibold tracking-[2px] uppercase text-muted mb-3">Specifications</div>
+                        <ul class="specs-list" id="specsList"></ul>
+                    </div>
+
+                    <hr class="border-0 border-t border-border-dark">
+
+                    <div class="flex items-center gap-3">
+                        <span class="font-accent text-[13px] font-semibold text-muted tracking-[1px]">QTY</span>
+                        <div class="qty-control">
+                            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                            <input type="number" class="qty-input" id="qtyInput" value="1" min="1">
+                            <button class="qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="btn-primary flex-1 text-center text-base py-3.5" onclick="openInquiryModal()">Send Inquiry</button>
+                        <a href="#" id="backBtn" class="btn-ghost py-3.5 px-5">← Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PARTS -->
+        <div class="mt-20 pt-20 border-t border-border-dark">
+            <div class="max-w-[1100px] mx-auto px-6">
+                <h2 class="font-heading text-[32px] font-extrabold mb-6">More in <span class="accent" id="relatedCatName">Engine Parts</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="relatedGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INQUIRY MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <p class="section-label">Product Inquiry</p>
+            <h3 class="font-heading text-[28px] font-bold mt-1 mb-1" id="modalName"></h3>
+            <p class="modal-price" id="modalPrice"></p>
+            <form class="modal-form" onsubmit="submitInquiry(event)" novalidate>
+                <input type="text" placeholder="Your Name *" id="mName">
+                <input type="text" placeholder="Phone Number *" id="mPhone">
+                <input type="number" placeholder="Quantity" id="mQty" min="1" value="1">
+                <textarea placeholder="Additional notes (optional)" id="mNotes" rows="3"></textarea>
+                <button type="submit" class="btn-primary">Send Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="border-t border-border-dark pt-10">
+        <div class="max-w-[1100px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center pb-10 gap-6 text-center md:text-left">
+            <div class="flex flex-col items-center md:items-start">
+                <img src="/Alvin---Motor-Parts-Accesories/assets/alvin-CdkM6YAD.jpg" alt="Alvin Motorshop" class="logo-img footer-logo-img">
+                <p class="text-xs text-muted mt-1">Parts & Accessories — Gingoog City</p>
+            </div>
+            <div class="flex flex-wrap gap-7 justify-center items-center">
+                <a href="https://www.facebook.com/alvin.galvez.686004" target="_blank" class="footer-fb flex items-center gap-1.5 font-accent text-[13px] font-semibold no-underline transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                    Facebook
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-border-dark py-4 px-6 text-center">
+            <p class="text-xs text-muted">© 2026 Alvin Motorshop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+      class="fixed bottom-6 right-6 z-50 w-10 h-10 bg-pink text-white rounded-full
+             flex items-center justify-center opacity-0 pointer-events-none
+             transition-opacity duration-300 hover:opacity-85">↑</button>
+
+</body>
+</html>
